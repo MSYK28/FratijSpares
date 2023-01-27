@@ -88,19 +88,22 @@
         let saleTypeEl = document.querySelector(".sale-type");
     
         function showHideCustomer() {    
+            
+            var saleTypeEl = document.getElementById("sale_type");
             customerSectionEl.classList.toggle("hide");
-           
-            var id = document.getElementByName("button")[0].id;
-            if(id == 1)
-            {
-                document.getElementById("text").innerHTML = "Cash";
-                document.getElementByName("button")[0].id = 0;
+
+            if ( saleTypeEl.innerHTML === "Credit" ) {
+                saleTypeEl.innerHTML = "Cash";
+                saleTypeEl.classList.add('btn-primary');
+                saleTypeEl.classList.remove('btn-warning');
             }
-            else
-            {
-                document.getElementById("text").innerHTML = "Credit";
-                document.getElementByName("button")[0].id = 1;
+            else {
+                // customerSectionEl.classList.toggle("show");
+                saleTypeEl.innerHTML = "Credit";
+                saleTypeEl.classList.remove('btn-primary');
+                saleTypeEl.classList.add('btn-warning');
             }
+            
         }
     
     </script>

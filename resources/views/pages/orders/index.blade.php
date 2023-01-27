@@ -71,10 +71,9 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="">Sale Type</label>
-                                        <button id="1" name="button" class="btn btn-sm btn-warning sale-type" onclick="showHideCustomer()">
-                                            click
-                                        </button>
-                                        <p class="text" id="text">Credit</p>
+                                        <div id="sale_type" name="button" class="button btn btn-sm btn-primary sale-type" onclick="showHideCustomer()">
+                                            Cash
+                                        </div>
                                     </div>
                                     <div class="customer-input-field hide">
                                         <div class="customer-details form-group" id="customer_details">
