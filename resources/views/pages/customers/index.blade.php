@@ -1,6 +1,6 @@
 @extends('layouts.app', [
 'class' => '',
-'elementActive' => 'suppliers'
+'elementActive' => 'customers'
 ])
 
 @section('content')
@@ -11,49 +11,42 @@
         <div class="col-md-8">
             <div class="card ">
                 <div class="card-header ">
-                    <h5 class="card-title">Suppliers</h5>
-                    <p class="card-category">List of suppliers for Fratij</p>
+                    <h5 class="card-title">Customers</h5>
+                    <p class="card-category">List of customers for Fratij</p>
                     @include('pages.alert')
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="supplier-table" class="table table-striped">
+                        <table id="customer-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Number</th>
-                                    <th>Account</th>
-                                    <th>Account Number</th>
+                                    <th>Owed</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($suppliers as $supplier)
+                                @foreach ($customers as $customer)
                                 <tr>
                                     <td>
-                                        {{ $supplier->name }}
+                                        {{ $customer->name }}
                                     </td>
                                     <td>
-                                        {{ $supplier->number }}
+                                        {{ $customer->number }}
                                     </td>
                                     <td>
-                                        {{ $supplier->bank }}
+                                        {{ $customer->owed }}
                                     </td>
                                     <td>
-                                        {{ $supplier->account_number }}
-                                    </td>
-                                    <td>
-                                        {{-- <a href="{{ url('suppliers/' . $supplier->id) }}" class="btn btn-sm
-                                        btn-info">Info</a> --}}
-                                        <div class="flex items-center justify-center w-screen h-screen">
-                                            <button onclick="this.Livewire.emit('openModal', 'supplier-edit-modal')"
-                                                    class="px-3 py-2 text-sm border border-gray-200 rounded-md">Open Modal</button>
-                                        </div>
-                                        {{-- <form action="{{ url('suppliers/'.$supplier->id) }}" method="post">
+                                        <a href="{{ url('customers/' . $customer->id) }}" class="btn btn-sm
+                                        btn-info">Info</a>
+                                        
+                                        <form action="{{ url('customers/'.$customer->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -66,20 +59,20 @@
         <div class="col-md-4">
             <div class="card ">
                 <div class="card-header ">
-                    <h5 class="card-title">Create Supplier Profile</h5>
-                    <p class="card-category">Add supplier details to create a profile</p>
+                    <h5 class="card-title">Create Customer Profile</h5>
+                    <p class="card-category">Add customer details to create a profile</p>
                     <hr>
                 </div>
                 <div class="card-body ">
-                    <form action="{{ url('/suppliers') }}" method="post">
+                    <form action="{{ url('/customers') }}" method="post">
                         @csrf
 
                         <div class="row d-flex justify-content-between">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label class="control-label" for="name">Supplier Name</label>
+                                    <label class="control-label" for="name">Customer Name</label>
                                     <input type="text" id="name" class="form-control" required name="name"
-                                        placeholder="Supplier Name">
+                                        placeholder="Customer Name">
                                 </div>
                             </div>
                             <div class="col-md-2"></div>
@@ -90,26 +83,6 @@
                                     <label class="control-label" for="number">Number</label>
                                     <input type="tel" id="number" class="form-control" required name="number"
                                         placeholder="Phone Number">
-                                </div>
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div class="row d-flex justify-content-between">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label class="control-label" for="bank">Bank</label>
-                                    <input type="text" id="bank" class="form-control" required name="bank"
-                                        placeholder="Bank">
-                                </div>
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div class="row d-flex justify-content-between">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label class="control-label" for="account_number">Account Number</label>
-                                    <input type="text" id="account_number" class="form-control" required name="account_number"
-                                        placeholder="Account Number">
                                 </div>
                             </div>
                             <div class="col-md-2"></div>

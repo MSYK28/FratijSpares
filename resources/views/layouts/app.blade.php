@@ -1,21 +1,3 @@
-<!--
-=========================================================
- Paper Dashboard - v2.0.0
-=========================================================
-
- Product Page: https://www.creative-tim.com/product/paper-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com)
- UPDIVISION (https://updivision.com)
- Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE)
-
- Coded by Creative Tim
-
-=========================================================
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,39 +23,18 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- CSS Just for demo purpose, don't include it in your project -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js">
     </script>
-
-    <link href="{{ asset('paper') }}/demo/demo.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css" />
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
-    <script src="https://kit.fontawesome.com/317338e7dd.js" crossorigin="anonymous"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css"
-        rel="stylesheet">
-
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <!-- Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' type='text/javascript'></script>
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
-    </script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
-    </script>
-
-    {{-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'> --}}
-
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
-        integrity='sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=='
-        crossorigin='anonymous' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css" integrity="sha512-giQeaPns4lQTBMRpOOHsYnGw1tGVzbAIHUyHRgn7+6FmiEgGGjaG0T2LZJmAPMzRCl+Cug0ItQ2xDZpTmEc+CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css' integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==' crossorigin='anonymous'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js' integrity='sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==' crossorigin='anonymous'></script>
+    
+    @livewireStyles
 
 </head>
 
@@ -88,6 +49,8 @@ The above copyright notice and this permission notice shall be included in all c
     @include('layouts.page_templates.guest')
     @endguest
 
+    @livewire('livewire-ui-modal')
+
     <!--   Core JS Files   -->
     <script src="{{ asset('paper') }}/js/core/jquery.min.js"></script>
     <script src="{{ asset('paper') }}/js/core/popper.min.js"></script>
@@ -98,13 +61,52 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- Chart JS -->
     <script src="{{ asset('paper') }}/js/plugins/chartjs.min.js"></script>
     <!--  Notifications Plugin    -->
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
     <script src="{{ asset('paper') }}/js/plugins/bootstrap-notify.js"></script>
     <script>
         $(document).ready(function () {
             $('#table_id').DataTable();
         });
 
+        $(document).ready(function () {
+            $('#supplier-table').DataTable();
+        });
+
+        $(document).ready(function () {
+            $('#order-table').DataTable();
+        });
+
+        $(document).ready(function () {
+            $('#customer-table').DataTable();
+        });
+
     </script>
+
+    <script>
+        let customerSectionEl = document.querySelector(".customer-input-field");
+        let saleTypeEl = document.querySelector(".sale-type");
+    
+        function showHideCustomer() {    
+            customerSectionEl.classList.toggle("hide");
+           
+            var id = document.getElementByName("button")[0].id;
+            if(id == 1)
+            {
+                document.getElementById("text").innerHTML = "Cash";
+                document.getElementByName("button")[0].id = 0;
+            }
+            else
+            {
+                document.getElementById("text").innerHTML = "Credit";
+                document.getElementByName("button")[0].id = 1;
+            }
+        }
+    
+    </script>
+    
+    <script src="{{ asset('js/product.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 
@@ -112,6 +114,10 @@ The above copyright notice and this permission notice shall be included in all c
     @stack('scripts')
 
     @include('layouts.navbars.fixed-plugin-js')
+    @livewireScripts
+
 </body>
+
+@yield('script')
 
 </html>

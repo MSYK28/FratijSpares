@@ -39,7 +39,8 @@ class SuppliersController extends Controller
         $suppliers = new Suppliers();
         $suppliers->name = Request::Input('name');
         $suppliers->number = Request::Input('number');
-        $suppliers->info = Request::Input('info');
+        $suppliers->bank = Request::Input('bank');
+        $suppliers->account_number = Request::Input('account_number');
 
         $suppliers->save();
 

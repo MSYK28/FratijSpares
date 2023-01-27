@@ -17,6 +17,7 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "@flaticon/flaticon-uicons": "^1.7.0",
         "datatables.net": "^1.13.1",
         "datatables.net-dt": "^1.13.1"
     }
