@@ -52,8 +52,66 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-       if($request)
+        $currentTime = Carbon::now();
+        if(Customers::where('name', $request->customer)->exists())
+        {
+            $debtOrder = new Debt();
+            $subtotal = $request->subtotal;
+            $paid = $request->paid;
+            $customer = $request->customer;
     
+            $debtOrder = [
+                'subtotal'   => $subtotal,
+                'paid'       => $paid,
+                'customer'   => $customer,
+                'created_at' => $currentTime,
+            ];
+    
+            DB::table('debts')->insert($debtOrder);
+
+            $product_id = $request->product_id;
+            $name = $request->name;
+            $quantity = $request->numberOfUnits;
+            $price = $request->price;
+            $buying = $request->buy_price;
+            $discount = $request->discount;
+            $customer = $request->customer;
+            $currentTime = Carbon::now();
+
+            for ($i=0; $i < count($name) ; $i++) { 
+                $datasave = [
+                    'product_id'    => $product_id[$i],
+                    'name'          => $name[$i],
+                    'quantity'      => $quantity[$i],
+                    'price'         => $price[$i],
+                    'buying'        => $buying[$i],
+                    'customer'      => $customer,
+                    'created_at'    => $currentTime,
+                ];
+
+                DB::table('debt_details')->insert($datasave);
+                
+                // $quantity = $datasave
+                foreach ($datasave as $key => $value) {
+                    $stocks = Stocks::where('id', $request->product_id)->get();
+                   
+                    if ($stocks) {
+                        $newQty = ($stocks[$i]->quantity) - ($request->numberOfUnits[$i]);
+                        Stocks::where('id', $request->product_id)
+                                ->update(['quantity' => $newQty]);
+                    }                    
+                    
+                }
+            }
+
+            return redirect('/dashboard')->with('success', 'Completed');
+
+        }
+        else{
+            dd("cash sale");
+        }
+        // $customer = $request->customer;
+       
         //IF SALE IS A DEBT
         $debtOrder = new Debt();
         $subtotal = $request->subtotal;

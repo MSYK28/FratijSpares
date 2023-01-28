@@ -80,6 +80,7 @@
                                             <label class="control-label" for="customer">Customer</label>
                                             <select name="customer" id="customer" class="form-control">
                                                 @foreach ($customers as $customer)
+                                                <option value="" selected>Cash</option>
                                                 <option value="{{ $customer->name }}">{{ $customer->name }}</option>
                                                 @endforeach
                                             </select>

@@ -91,6 +91,7 @@
             
             var saleTypeEl = document.getElementById("sale_type");
             customerSectionEl.classList.toggle("hide");
+            customerSectionEl.classList.remove("disabled");
 
             if ( saleTypeEl.innerHTML === "Credit" ) {
                 saleTypeEl.innerHTML = "Cash";
