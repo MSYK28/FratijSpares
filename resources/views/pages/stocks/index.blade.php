@@ -57,17 +57,17 @@
                                         {{ $stock->marked_price }}
                                     </td>
                                     <td>
-                                        {{-- <a href="{{ url('stocks/' . $supplier->id) }}" class="btn btn-sm
-                                        btn-info">Info</a> --}}
+                                        <a href="{{ url('stocks/' . $stock->id) }}" class="btn btn-sm
+                                        btn-info">Info</a>
                                         <a href="{{ url('stocks/' . $stock->id . '/edit') }}"
-                                            class="btn btn-sm btn-success ml-3 mr-3">
+                                            class="btn btn-sm btn-success ml-3 mr-3">Edit
                                             <i class="fi fi-ts-attribution pen"></i>
                                         </a>
-                                        {{-- <form action="{{ url('stocks/'.$supplier->id) }}" method="post">
+                                        <form action="{{ url('stocks/'.$stock->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form> --}}
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -20,7 +20,7 @@
                                 <p class="card-category">Items Sold</p>
                                 <p class="card-title">
                                     {{ $data['Count'] }}
-                                <p>
+                                    <p>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                                 <p class="card-category">Revenue</p>
                                 <p class="card-title">
                                     {{ $data['Total Amount'] }}
-                                <p>
+                                    <p>
                             </div>
                         </div>
                     </div>
@@ -73,8 +73,8 @@
                             <div class="numbers">
                                 <p class="card-category">Profit</p>
                                 <p class="card-title">
-                                    {{ ('') }}
-                                <p>
+                                    {{ $data['Profit'] }}
+                                    <p>
                             </div>
                         </div>
                     </div>
@@ -98,8 +98,9 @@
                         </div>
                         <div class="col-7 col-md-8">
                             <div class="numbers">
-                                <p class="card-category">Followers</p>
-                                <p class="card-title">+45K
+                                <p class="card-category">Owed</p>
+                                <p class="card-title">
+                                    {{ $data['Debt Amount'] }}
                                     <p>
                             </div>
                         </div>
@@ -108,67 +109,139 @@
                 <div class="card-footer ">
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-refresh"></i> Update now
+                        <i class="fa fa-refresh"></i>
+                        <a href="{{ route('customers.index') }}">View More</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            @include('pages.alert')
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Sales Today</h5>
-                    <p class="card-category">Sales made on <span class="text-black-700">{{ $date }}</span></p>
-                </div>
-                <div class="card-body ">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="order-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total</th>
-                                    <th>Profit</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="orders">
-                                @foreach ($order_details as $detail)
-                                <tr>
-                                    <td>
-                                        {{ $detail->name }}
-                                    </td>
-                                    <td>
-                                        {{ $detail->numberOfUnits }}
-                                    </td>
-                                    <td>
-                                        {{ ($detail->price) }}
-                                    </td>
-                                    <td>
-                                        {{ ($detail->numberOfUnits) * ($detail->price) }}
-                                    </td>
-                                    <td>
-                                        {{ ((($detail->price) - ($detail->buy_price)) * ($detail->numberOfUnits)) - ($detail->discount) }}
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+    <div class="sale-section">
+        @include('pages.nav-slider')
+
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+                tabindex="0">
+                <div class="row my-3">
+                    <div class="col-md-12">
+                        @include('pages.alert')
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Sales Today</h5>
+                                <p class="card-category">Sales made on <span class="text-black-700">{{ $data['Date'] }}</span>
+                                </p>
+                            </div>
+                            <div class="card-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="order-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                                <th>Profit</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="orders">
+                                            @foreach ($order_details as $detail)
+                                            <tr>
+                                                <td>
+                                                    {{ $detail->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $detail->quantity }}
+                                                </td>
+                                                <td>
+                                                    {{ ($detail->price) }}
+                                                </td>
+                                                <td>
+                                                    {{ ($detail->quantity) * ($detail->price) }}
+                                                </td>
+                                                <td>
+                                                    {{ ((($detail->price) - ($detail->buying)) * ($detail->quantity)) - ($detail->discount) }}
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-history"></i> Updated 3 minutes ago
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
+
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                <div class="row my-3">
+                    <div class="col-md-12">
+                        @include('pages.alert')
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Credit Sales Today</h5>
+                                <p class="card-category">Sales made on <span class="text-black-700">{{ $data['Date'] }}</span>
+                                </p>
+                            </div>
+                            <div class="card-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="credit-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                                {{-- <th>Profit</th> --}}
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="orders">
+                                            @foreach ($debt_details as $detail)
+                                            <tr>
+                                                <td>
+                                                    {{ $detail->name }}
+                                                </td>
+                                                <td>
+                                                    {{ $detail->quantity }}
+                                                </td>
+                                                <td>
+                                                    {{ ($detail->price) }}
+                                                </td>
+                                                <td>
+                                                    {{ ($detail->quantity) * ($detail->price) }}
+                                                </td>
+                                                {{-- <td>
+                                                    {{ ((($detail->price) - ($detail->buying)) * ($detail->quantity)) - ($detail->discount) }}
+                                                </td> --}}
+                                                <td></td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer ">
+                                <hr>
+                                <div class="stats">
+                                    <i class="fa fa-history"></i> Updated 3 minutes ago
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
     {{-- <div class="row">
         <div class="col-md-4">

@@ -56,9 +56,11 @@ class StocksController extends Controller
      * @param  \App\Models\Stocks  $stocks
      * @return \Illuminate\Http\Response
      */
-    public function show(Stocks $stocks)
+    public function show(Stocks $stocks, $id)
     {
-        //
+        $stocks = Stocks::find($id);
+
+        return view('pages.suppliers.show', compact('stocks'));
     }
 
     /**
@@ -67,9 +69,11 @@ class StocksController extends Controller
      * @param  \App\Models\Stocks  $stocks
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stocks $stocks)
+    public function edit(Stocks $stocks, $id)
     {
-        //
+        $stock = Stocks::find($id);
+        $suppliers = Suppliers::all();
+        return view('pages.stocks.edit', compact(['stock', 'suppliers']));
     }
 
     /**
@@ -79,9 +83,18 @@ class StocksController extends Controller
      * @param  \App\Models\Stocks  $stocks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stocks $stocks)
+    public function update(Request $request, Stocks $stocks, $id)
     {
-        //
+        $stocks = Stocks::find($id);
+        $stocks->name = Request::input('name');
+        $stocks->quantity = Request::input('quantity');
+        $stocks->supplier = Request::input('supplier');
+        $stocks->buying_price = Request::input('buying_price');
+        $stocks->marked_price = Request::input('marked_price');
+
+        $stocks->update();
+
+        return redirect('stocks')->with('status', 'Stock info updated'); 
     }
 
     /**
@@ -92,6 +105,8 @@ class StocksController extends Controller
      */
     public function destroy(Stocks $stocks)
     {
-        //
+        Stocks::find($id)->delete();
+
+        return redirect()->back()->with('status', 'Stock deleted successfully');
     }
 }

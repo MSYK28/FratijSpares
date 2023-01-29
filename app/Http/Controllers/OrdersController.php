@@ -53,6 +53,7 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         $currentTime = Carbon::now();
+
         if(Customers::where('name', $request->customer)->exists())
         {
             $debtOrder = new Debt();
@@ -91,7 +92,6 @@ class OrdersController extends Controller
 
                 DB::table('debt_details')->insert($datasave);
                 
-                // $quantity = $datasave
                 foreach ($datasave as $key => $value) {
                     $stocks = Stocks::where('id', $request->product_id)->get();
                    
@@ -107,60 +107,45 @@ class OrdersController extends Controller
             return redirect('/dashboard')->with('success', 'Completed');
 
         }
-        else{
-            dd("cash sale");
-        }
-        // $customer = $request->customer;
-       
-        //IF SALE IS A DEBT
-        $debtOrder = new Debt();
-        $subtotal = $request->subtotal;
-        $paid = $request->paid;
-        $balance = $request->balance;
-        $customer = $request->customer;
+        else
+        {
+            //CASH SALE STARTS HERE
+            $cashOrder = new OrderDetails();
+            $product_id = $request->product_id;
+            $name = $request->name;
+            $quantity = $request->numberOfUnits;
+            $price = $request->price;
+            $buying = $request->buy_price;
+            $discount = $request->discount;
+            $currentTime = Carbon::now();
 
-        $debtOrder = [
-            'subtotal'   => $subtotal,
-            'paid'       => $paid,
-            'customer'   => $customer,
-            'created_at' => $currentTime,
-        ];
+            for ($i=0; $i < count($name) ; $i++) { 
+                $datasave = [
+                    'product_id'    => $product_id[$i],
+                    'name'          => $name[$i],
+                    'quantity'      => $quantity[$i],
+                    'price'         => $price[$i],
+                    'buying'        => $buying[$i],
+                    'discount'      => $discount,
+                    'created_at'    => $currentTime,
+                ];
 
-        DB::table('debts')->insert($debtOrder);
-
-
-        $product_id = $request->product_id;
-        $name = $request->name;
-        $quantity = $request->numberOfUnits;
-        $price = $request->price;
-        $discount = $request->discount;
-        $customer = $request->customer;
-        $currentTime = Carbon::now();
-
-        for ($i=0; $i < count($name) ; $i++) { 
-            $datasave = [
-                'product_id'    => $product_id[$i],
-                'name'          => $name[$i],
-                'numberOfUnits' => $quantity[$i],
-                'price'         => $price[$i],
-                'created_at'    => $currentTime,
-            ];
-
-            DB::table('debt_details')->insert($datasave);
-            
-            // $quantity = $datasave
-            foreach ($datasave as $key => $value) {
-                $attribute = Stocks::where('id', $product_id)->first();
-                if ($attribute) {
-                    $stock = ($attribute->quantity) - ($quantity[$i]);
-                    $attribute->update(['quantity' => $stock]);
-                }                    
+                // dd($datasave);
+                DB::table('order_details')->insert($datasave);
                 
+                // $quantity = $datasave
+                foreach ($datasave as $key => $value) {
+                    $stocks = Stocks::where('id', $request->product_id)->get();
+                    if ($stocks) {
+                        $newQty = ($stocks[$i]->quantity) - ($request->numberOfUnits[$i]);
+                        dd($request->numberOfUnits[$i]);
+                        Stocks::where('id', $request->product_id)
+                                ->update(['quantity' => $newQty]);
+                    }                    
+                    
+                }
             }
         }
-
-        return redirect('/dashboard')->with('success', 'Completed');
-
     }
 
 

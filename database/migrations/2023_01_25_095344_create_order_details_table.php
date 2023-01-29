@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('product_id');
-            $table->string('numberOfUnits');
+            $table->string('quantity');
             $table->string('price');
             $table->string('discount')->default(0);
-            $table->string('buy_price');
+            $table->string('buying');
             $table->timestamps();
         });
     }

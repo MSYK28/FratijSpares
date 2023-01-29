@@ -81,6 +81,11 @@
             $('#customer-table').DataTable();
         });
 
+        $(document).ready(function () {
+            $('#credit-table').DataTable();
+        });
+        
+
     </script>
 
     <script>

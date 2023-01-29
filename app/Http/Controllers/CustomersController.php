@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
+use App\Models\Debt;
 use Illuminate\Support\Facades\Request;
 
 
@@ -15,7 +16,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = Customers::all();
+        $customers = Debt::all();
         return view('pages.customers.index', compact('customers'));
     }
 
@@ -52,9 +53,11 @@ class CustomersController extends Controller
      * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function show(Customers $customers)
+    public function show(Customers $customers, $id)
     {
-        //
+        $customers = Customers::find($id);
+        return view('pages.customers.show', compact('customers'));
+        
     }
 
     /**
@@ -63,9 +66,10 @@ class CustomersController extends Controller
      * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customers $customers)
+    public function edit(Customers $customers, $id)
     {
-        //
+        $customers = Customers::find($id);
+        return view('pages.customers.edit', compact('customers'));
     }
 
     /**
@@ -75,9 +79,16 @@ class CustomersController extends Controller
      * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customers $customers)
+    public function update(Request $request, Customers $customers, $id)
     {
-        //
+        $customers = Customers::find($id);
+        $customers->name = Request::Input('name');
+        $customers->number = Request::Input('number');
+
+        $customers->update();
+
+        return redirect('customers')->with('status', 'Customers profile created successfully');
+    
     }
 
     /**
@@ -86,8 +97,10 @@ class CustomersController extends Controller
      * @param  \App\Models\Customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customers $customers)
+    public function destroy(Customers $customers, $id)
     {
-        //
+        Customers::find($id)->delete();
+
+        return redirect()->back()->with('Status', 'Customer information deleted successfully');
     }
 }

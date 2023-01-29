@@ -36,7 +36,7 @@
                                         {{ $customer->number }}
                                     </td>
                                     <td>
-                                        {{ $customer->owed }}
+                                        {{ ($customer->subtotal) -($customer->paid) }}
                                     </td>
                                     <td>
                                         <a href="{{ url('customers/' . $customer->id) }}" class="btn btn-sm

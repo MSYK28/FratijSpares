@@ -43,17 +43,20 @@
                                         {{ $supplier->account_number }}
                                     </td>
                                     <td>
-                                        {{-- <a href="{{ url('suppliers/' . $supplier->id) }}" class="btn btn-sm
-                                        btn-info">Info</a> --}}
-                                        <div class="flex items-center justify-center w-screen h-screen">
+                                        <a href="{{ url('suppliers/' . $supplier->id) }}" class="btn btn-sm
+                                        btn-info">Info</a>
+                                        {{-- <div class="flex items-center justify-center w-screen h-screen">
                                             <button onclick="this.Livewire.emit('openModal', 'supplier-edit-modal')"
                                                     class="px-3 py-2 text-sm border border-gray-200 rounded-md">Open Modal</button>
-                                        </div>
-                                        {{-- <form action="{{ url('suppliers/'.$supplier->id) }}" method="post">
+                                        </div> --}}
+                                        <a href="{{ url('suppliers/' . $supplier->id . '/edit') }}"
+                                            class="btn btn-sm btn-success">Edit</a>
+
+                                        <form action="{{ url('suppliers/'.$supplier->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                        </form> --}}
+                                        <button type="submit" class="btn btn-sm btn-danger">Del</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

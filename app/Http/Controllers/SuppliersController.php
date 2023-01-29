@@ -83,11 +83,12 @@ class SuppliersController extends Controller
         $suppliers = Suppliers::find($id);
         $suppliers->name = Request::input('name');
         $suppliers->number = Request::input('number');
-        $suppliers->info = Request::input('info');
+        $suppliers->bank = Request::input('bank');
+        $suppliers->account_number = Request::input('account_number');
 
         $suppliers->update();
 
-        return redirect('suppliers')->with('status', 'Profile updated');
+        return redirect('suppliers')->with('status', 'Supplier info updated');
     }
 
     /**
@@ -96,8 +97,10 @@ class SuppliersController extends Controller
      * @param  \App\Models\Suppliers  $suppliers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Suppliers $suppliers)
+    public function destroy(Suppliers $suppliers, $id)
     {
-        //
+        Suppliers::find($id)->delete();
+
+        return redirect()->back()->with('status', 'Supplier deleted successfully');
     }
 }
