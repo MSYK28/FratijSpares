@@ -41,6 +41,8 @@
                                     <td>
                                         <a href="{{ url('customers/' . $customer->id) }}" class="btn btn-sm
                                         btn-info">Info</a>
+                                        <a href="{{ url('customers/' . $customer->id . '/edit') }}"
+                                            class="btn btn-sm btn-success">Edit</a>
                                         
                                         <form action="{{ url('customers/'.$customer->id) }}" method="post">
                                         @csrf

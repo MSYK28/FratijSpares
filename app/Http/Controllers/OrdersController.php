@@ -137,8 +137,12 @@ class OrdersController extends Controller
                 foreach ($datasave as $key => $value) {
                     $stocks = Stocks::where('id', $request->product_id)->get();
                     if ($stocks) {
+
                         $newQty = ($stocks[$i]->quantity) - ($request->numberOfUnits[$i]);
-                        dd($request->numberOfUnits[$i]);
+                        
+                        // $stocks->update();
+                        
+                        // dd($newQty);
                         Stocks::where('id', $request->product_id)
                                 ->update(['quantity' => $newQty]);
                     }                    

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customers;
 use App\Models\Debt;
+use App\Models\DebtDetails;
 use Illuminate\Support\Facades\Request;
 
 
@@ -56,7 +57,13 @@ class CustomersController extends Controller
     public function show(Customers $customers, $id)
     {
         $customers = Customers::find($id);
-        return view('pages.customers.show', compact('customers'));
+
+        $debts = Debt::all();
+        $debt_details = DebtDetails::all();
+        // $date = $debts->created_at;
+        // dd($debt_details);
+
+        return view('pages.customers.show', compact(['customers', 'debts', 'debt_details']));
         
     }
 

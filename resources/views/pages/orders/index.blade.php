@@ -7,8 +7,6 @@
 @livewireStyles
 
 <div class="content">
-    @include('pages.nav-slider')
-
     <div class="row my-3">
         <div class="col-md-7">
             <div class="card">
